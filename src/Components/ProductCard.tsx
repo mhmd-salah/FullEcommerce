@@ -2,22 +2,23 @@ import {  Button, Card, CardBody, Flex, Heading, Image, Spacer, Stack, Text } fr
 import {motion} from "framer-motion"
 
 function ProductCard({ attributes }) {
-  console.log(attributes);
+  console.log(import.meta.env.VITE_SERVER_URL);
   return (
     <motion.div
       // style={{ scale: 0.99 }}
-      initial={{ x: -300 }}
-      whileInView={{ x: 0 }}
+      initial={{ opacity: 0.7 }}
+      whileInView={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       <Card bg={"#f6f7f8"} border={"2px solid #eee"}>
         <CardBody>
           <Image
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            src={`${import.meta.env.VITE_SERVER_URL}${
+              attributes.thumbnail?.data?.attributes?.url
+            }`}
             alt="Green double couch with wooden legs"
             borderRadius="50%"
-            w={200}
-            h={200}
+            boxSize={140}
             mx={"auto"}
           />
           <Stack mt="6" spacing="3">
