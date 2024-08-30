@@ -1,3 +1,13 @@
 @tailwind utilities;
 @tailwind base;
 @tailwind components;
+
+.active {
+  color: teal;
+}
+aside .active{
+  color: teal;
+  border-left: 3px solid teal;
+  background-color: #fafafa;
+  @apply shadow-sm
+}

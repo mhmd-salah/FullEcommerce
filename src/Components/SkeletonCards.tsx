@@ -9,7 +9,7 @@ function SkeletonCards() {
         m={6}
         gap={"4"}
       >
-        {Array.from({ length: 2 }, (_, idx) => idx).map((idx) => (
+        {Array.from({ length: 1 }, (_, idx) => idx).map((idx) => (
           <ProductCardSkelaton key={idx} />
         ))}
       </Grid>

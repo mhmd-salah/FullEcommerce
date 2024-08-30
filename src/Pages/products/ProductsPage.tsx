@@ -5,6 +5,8 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import SkeletonCards from "../../Components/SkeletonCards";
 
+
+
 export interface iproductsAttributes{
   id:number;
   title:string
@@ -15,7 +17,7 @@ interface IproductsData {
     id: number;
     attributes: iproductsAttributes;
 }
-interface iapiResponse{
+export interface iapiResponse{
   data:IproductsData[]
 }
 function ProductsPage() {

@@ -2,6 +2,7 @@ import {  NavLink } from "react-router-dom";
 import MyMenu from "./MyMenu";
 
 function Header() {
+
   return (
     <header className="bg-[#deee] py-5 text-lg shadow-sm">
       <div className="container  flex justify-between items-center">

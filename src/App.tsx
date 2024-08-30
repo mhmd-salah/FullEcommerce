@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RootLayout from "./Pages/RootLayout";
 import ProductsLayout from "./Pages/products";
 import ProductDetailPage from "./Pages/products/ProductDetailPage";
+import Categoies from "./Pages/products/Categories";
 function App() {
 
   const client = new QueryClient();
@@ -19,6 +20,7 @@ function App() {
           </Route>
           <Route path="/products" element={<ProductsLayout/>}>
             <Route index element={<ProductsPage />} />
+            <Route path="categories" element={<Categoies/>} />
             <Route path=":id" element={<ProductDetailPage />} />
           </Route>
         </Routes>

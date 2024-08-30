@@ -26,7 +26,7 @@ function ProductsPage() {
         templateColumns="repeat(auto-fill , minmax(250px,1fr))"
         gap={"2"}
       >
-        {Array.from({length:10},(_,idx)=>idx).map(() =><ProductCardSkelaton/>)}
+        {Array.from({length:5},(_,idx)=>idx).map(() =><ProductCardSkelaton/>)}
       </Grid>
     </motion.div>
   );
