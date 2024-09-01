@@ -2,8 +2,9 @@
 function HomePage() {
   return (
     <>
-      <div className="bg-landingImage bg-cover h-[calc(100vh-80px)] flex items-center">
-        <div className="container">
+      <div className="bg-landingImage bg-cover h-[calc(100vh-81px)] flex items-center relative">
+        <div className="w-full h-full absolute top-0 left-0 bg-black/30"/>
+        <div className="container relative">
           <h2 className="text-6xl -mt-12 text-center text-white font-bold">
             Welcome In Souq For Shopping
           </h2>

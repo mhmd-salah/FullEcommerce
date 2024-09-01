@@ -7,6 +7,7 @@ import RootLayout from "./Pages/RootLayout";
 import ProductsLayout from "./Pages/products";
 import ProductDetailPage from "./Pages/products/ProductDetailPage";
 import Categoies from "./Pages/products/Categories";
+import Cart from "./Pages/Cart";
 function App() {
 
   const client = new QueryClient();
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<RootLayout/>}>
             <Route index element={<HomePage />} />
             <Route path="/category" element={<AboutPage />} />
+            <Route path="/cart" element={<Cart/>} />
           </Route>
           <Route path="/products" element={<ProductsLayout/>}>
             <Route index element={<ProductsPage />} />

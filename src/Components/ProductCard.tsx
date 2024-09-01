@@ -11,11 +11,11 @@ function ProductCard({ attributes ,id}:iproductsAttributesProps) {
   return (
     <motion.div
       // style={{ scale: 0.94 }}
-      initial={{ opacity: 0.4, scale: 0.8 }}
+      initial={{ opacity: 0.4, scale:  0.97}}
       whileInView={{ opacity: 1, scale: 1 }}
       // transition={{ duration: 0.3 }}
     >
-      <Card bg={"rgb(231, 240, 240)"} border={"2px solid #eee"}>
+      <Card bg={"rgb(231, 240, 240)"} textColor={"black"} border={"2px solid #eee"}>
         <CardBody>
           <Image
             src={`${import.meta.env.VITE_SERVER_URL}${

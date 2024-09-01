@@ -1,7 +1,6 @@
 import { Grid } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import ProductCard from "../Components/ProductCard";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import ProductCardSkelaton from "../Components/ProductCardSkelaton";
@@ -25,6 +24,7 @@ function ProductsPage() {
         m={3}
         templateColumns="repeat(auto-fill , minmax(250px,1fr))"
         gap={"2"}
+        className="w-full"
       >
         {Array.from({length:5},(_,idx)=>idx).map(() =><ProductCardSkelaton/>)}
       </Grid>

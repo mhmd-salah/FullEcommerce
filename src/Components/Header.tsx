@@ -11,11 +11,12 @@ function Header() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/category">Category</NavLink>
-          <MyMenu/>
+          <NavLink to="/Cart">Cart</NavLink>
+          <MyMenu />
         </ul>
       </div>
     </header>
-  )
+  );
 }
 
 export default Header
