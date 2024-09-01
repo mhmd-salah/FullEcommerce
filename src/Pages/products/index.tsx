@@ -1,11 +1,11 @@
 import {  Outlet } from 'react-router-dom';
 import Aside from '../../Components/Aside';
-import Header from '@/Components/Header';
+import NavChakra from '@/Components/NavChakra';
 
 function ProductsLayout() {
   return (
     <>
-      <Header />
+      <NavChakra/>
       <div className="flex">
         <Aside/>
         <Outlet />

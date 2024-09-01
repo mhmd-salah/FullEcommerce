@@ -35,11 +35,13 @@ function ProductCard({ attributes ,id}:iproductsAttributesProps) {
               spaces, earthy toned spaces
             </Text>
             <Flex>
-              <Text color="blue.600" fontSize="2xl">
+              <Text color="teal.600" fontSize="2xl">
                 $450
               </Text>
               <Spacer />
-              <Button as={Link} to={`${id}`} variant="solid" colorScheme="teal">
+              <Button as={Link} to={`${id}`} variant="solid" bg="teal.500" _hover={{
+                bg:"teal.600",
+              }}>
                 More Details
               </Button>
             </Flex>

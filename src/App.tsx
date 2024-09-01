@@ -1,4 +1,4 @@
-import { Routes,Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./Pages";
 import AboutPage from "./Pages/CategoryPage";
 import ProductsPage from "./Pages/ProductsPage";
@@ -7,22 +7,23 @@ import RootLayout from "./Pages/RootLayout";
 import ProductsLayout from "./Pages/products";
 import ProductDetailPage from "./Pages/products/ProductDetailPage";
 import Categoies from "./Pages/products/Categories";
-import Cart from "./Pages/Cart";
+import CartPage from "./Pages/CartPage";
+import LoginPage from "./Pages/LoginPage";
 function App() {
-
   const client = new QueryClient();
   return (
     <>
       <QueryClientProvider client={client}>
         <Routes>
-          <Route path="/" element={<RootLayout/>}>
+          <Route path="/" element={<RootLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/category" element={<AboutPage />} />
-            <Route path="/cart" element={<Cart/>} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </Route>
-          <Route path="/products" element={<ProductsLayout/>}>
+          <Route path="/products" element={<ProductsLayout />}>
             <Route index element={<ProductsPage />} />
-            <Route path="categories" element={<Categoies/>} />
+            <Route path="categories" element={<Categoies />} />
             <Route path=":id" element={<ProductDetailPage />} />
           </Route>
         </Routes>
@@ -31,4 +32,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

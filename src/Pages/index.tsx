@@ -1,11 +1,18 @@
+import { useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 function HomePage() {
+  const ref = useRef(null)
+  const isInView  =useInView(ref)
+  useEffect(()=>{
+    console.log("the element in view ,"+isInView)
+  },[isInView])
   return (
     <>
-      <div className="bg-landingImage bg-cover h-[calc(100vh-81px)] flex items-center relative">
+      <div className="bg-landingImage bg-cover h-[calc(100vh-64px)] flex items-center relative">
         <div className="w-full h-full absolute top-0 left-0 bg-black/30"/>
         <div className="container relative">
-          <h2 className="text-6xl -mt-12 text-center text-white font-bold">
+          <h2 className="text-6xl -mt-12 text-center text-white font-bold" ref={ref}>
             Welcome In Souq For Shopping
           </h2>
         </div>

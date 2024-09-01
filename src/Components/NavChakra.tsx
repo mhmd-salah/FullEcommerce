@@ -4,30 +4,36 @@ import {
   Box,
   Flex,
   Avatar,
-  Text,
   Button,
+  Link,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
+  HStack,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { Link as RouterLink} from "react-router-dom";
 
 interface Props {
   children: React.ReactNode;
 }
 
+
+const Links = ["Products", "Projects", "Team"];
+
+
 const NavLink = ({children}: Props) => {
 
   return (
-    <Box
-      as="a"
+    <Link
+      as={RouterLink}
+      to={`/${(children as string).toLowerCase()}`}
       px={2}
       py={1}
       rounded={"md"}
@@ -38,25 +44,30 @@ const NavLink = ({children}: Props) => {
       href={"#"}
     >
       {children}
-    </Box>
+    </Link>
   );
 };
 
 export default function NavChakra() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>Logo</Box>
+          <RouterLink to={"/"}>Home</RouterLink>
+          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+            {Links.map((link) => (
+              <NavLink key={link}>{link}</NavLink>
+            ))}
+          </HStack>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
-
+              <Button as={RouterLink} to={"/login"}>Login</Button>
               <Menu>
                 <MenuButton
                   as={Button}

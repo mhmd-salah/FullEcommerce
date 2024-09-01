@@ -1,4 +1,4 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import ProductCard from "../Components/ProductCard";
 import axios from "axios";
@@ -19,14 +19,18 @@ function ProductsPage() {
   })
 
   if(isLoading) return (
-    <motion.div initial={{opacity:0.7}} whileInView={{opacity:1}}>
+    <motion.div initial={{ opacity: 0.7 }} whileInView={{ opacity: 1 }}>
       <Grid
         m={3}
-        templateColumns="repeat(auto-fill , minmax(250px,1fr))"
-        gap={"2"}
+        templateColumns="repeat(4,minmax(220px,1fr))"
+        gap={"4"}
         className="w-full"
       >
-        {Array.from({length:5},(_,idx)=>idx).map(() =><ProductCardSkelaton/>)}
+        {Array.from({ length: 4 }, (_, idx) => idx).map(() => (
+          <GridItem>
+            <ProductCardSkelaton />
+          </GridItem>
+        ))}
       </Grid>
     </motion.div>
   );
