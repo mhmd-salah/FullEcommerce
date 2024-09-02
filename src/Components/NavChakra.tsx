@@ -18,18 +18,15 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 interface Props {
   children: React.ReactNode;
 }
 
-
 const Links = ["Products", "Projects", "Team"];
 
-
-const NavLink = ({children}: Props) => {
-
+const NavLink = ({ children }: Props) => {
   return (
     <Link
       as={RouterLink}
@@ -55,8 +52,8 @@ export default function NavChakra() {
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <RouterLink to={"/"}>Home</RouterLink>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+            <RouterLink to={"/"}>Home</RouterLink>
             {Links.map((link) => (
               <NavLink key={link}>{link}</NavLink>
             ))}
@@ -64,10 +61,9 @@ export default function NavChakra() {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              <Button as={RouterLink} to={"/login"}>
+                Login
               </Button>
-              <Button as={RouterLink} to={"/login"}>Login</Button>
               <Menu>
                 <MenuButton
                   as={Button}
@@ -100,6 +96,10 @@ export default function NavChakra() {
                   <MenuItem>Logout</MenuItem>
                 </MenuList>
               </Menu>
+
+              <Button onClick={toggleColorMode}>
+                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              </Button>
             </Stack>
           </Flex>
         </Flex>

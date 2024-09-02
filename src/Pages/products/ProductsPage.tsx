@@ -44,7 +44,9 @@ function ProductsPage() {
         gap={"4"}
       >
         {data?.data.map((product) => (
+
           <ProductCard key={product.id} {...product} />
+          
         ))}
       </Grid>
     </motion.div>
