@@ -12,7 +12,7 @@ function HomePage() {
       <div className="bg-landingImage bg-cover h-[calc(100vh-64px)] flex items-center relative">
         <div className="w-full h-full absolute top-0 left-0 bg-black/30"/>
         <div className="container relative">
-          <h2 className="text-6xl -mt-12 text-center text-teal-200 font-bold" ref={ref}>
+          <h2 className="text-6xl -mt-12 text-center py-3 px-2 w-fit mx-auto font-bold bg-teal-600" ref={ref}>
             Welcome In Souq For Shopping
           </h2>
         </div>

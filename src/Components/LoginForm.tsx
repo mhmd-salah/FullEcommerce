@@ -32,9 +32,11 @@ export default function LoginForm() {
     setUser({...user,[name]:value})
   };
 
-  const submitHandler= (e:React.FormEvent<HTMLFormElement>) => {
+  const submitHandler= (e:React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(user)
+    console.log(e)
+    console.log(e.nativeEvent)
   };
   return (
     <Flex

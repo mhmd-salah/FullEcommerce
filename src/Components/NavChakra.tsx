@@ -1,5 +1,4 @@
-"use client";
-
+  
 import {
   Box,
   Flex,
@@ -16,9 +15,10 @@ import {
   useColorMode,
   Center,
   HStack,
+  color,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 
 interface Props {
   children: React.ReactNode;
@@ -47,15 +47,16 @@ const NavLink = ({ children }: Props) => {
 
 export default function NavChakra() {
   const { colorMode, toggleColorMode } = useColorMode();
+
   // const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
             <RouterLink to={"/"}>Home</RouterLink>
             {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
+              <NavLink key={link} >{link}</NavLink>
             ))}
           </HStack>
 
@@ -64,6 +65,7 @@ export default function NavChakra() {
               <Button as={RouterLink} to={"/login"}>
                 Login
               </Button>
+
               <Menu>
                 <MenuButton
                   as={Button}
@@ -77,6 +79,7 @@ export default function NavChakra() {
                     src={"https://avatars.dicebear.com/api/male/username.svg"}
                   />
                 </MenuButton>
+
                 <MenuList alignItems={"center"}>
                   <br />
                   <Center>
