@@ -4,7 +4,6 @@ import NavChakra from "@/Components/NavChakra";
 function RootLayout() {
   return (
     <>
-      {/* <Header/> */}
       <NavChakra/>
       <Outlet/>
     </>

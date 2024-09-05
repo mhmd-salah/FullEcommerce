@@ -13,6 +13,7 @@ import {
   useColorModeValue,
   InputRightElement,
   InputGroup,
+  FormHelperText,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -22,21 +23,25 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-  const [isUsername, setIsUsername] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // handler 
-  const changeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-    const { name,value} = e.target;
-    setUser({...user,[name]:value})
+  // handler
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
 
-  const submitHandler= (e:React.SyntheticEvent<HTMLFormElement>) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user)
-    console.log(e)
-    console.log(e.nativeEvent)
+    if (!user.email) {
+      setIsEmail(true);
+      return;
+    }else setIsEmail(false)
+    if(!user.password){
+      setIsPassword(true)
+    }else setIsPassword(false)
   };
   return (
     <Flex
@@ -68,8 +73,14 @@ export default function LoginForm() {
                 type="email"
                 focusBorderColor="teal.400"
                 value={user.email}
+                isInvalid={isEmail}
                 onChange={changeHandler}
               />
+              {isEmail ? (
+                <FormHelperText color="red.300">
+                  Enter Your Email
+                </FormHelperText>
+              ):null}
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
@@ -79,6 +90,7 @@ export default function LoginForm() {
                   type={showPassword ? "text" : "password"}
                   focusBorderColor="teal.400"
                   value={user.password}
+                  isInvalid={isPassword}
                   onChange={changeHandler}
                 />
                 <InputRightElement h={"full"}>
@@ -92,6 +104,9 @@ export default function LoginForm() {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              {isPassword ? (
+                <FormHelperText color="red.300">Enter Your Pass</FormHelperText>
+              ):null}
             </FormControl>
             <Stack spacing={10}>
               <Stack
