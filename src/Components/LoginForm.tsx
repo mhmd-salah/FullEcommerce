@@ -33,6 +33,11 @@ export default function LoginForm() {
     setUser({ ...user, [name]: value });
   };
 
+  // const validateInput=(input:string)=>{
+  //   if(!input){
+  //     `set${input.toLowerCase()}`
+  //   }
+  // }
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user.email) {
@@ -71,7 +76,7 @@ export default function LoginForm() {
               <Input
                 name="email"
                 type="email"
-                focusBorderColor="teal.400"
+                focusBorderColor={isPassword ? "red.600" : "teal.400"}
                 value={user.email}
                 isInvalid={isEmail}
                 onChange={changeHandler}
@@ -80,7 +85,7 @@ export default function LoginForm() {
                 <FormHelperText color="red.300">
                   Enter Your Email
                 </FormHelperText>
-              ):null}
+              ) : null}
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
@@ -88,7 +93,7 @@ export default function LoginForm() {
                 <Input
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  focusBorderColor="teal.400"
+                  focusBorderColor={isPassword ? "red.600" : "teal.400"}
                   value={user.password}
                   isInvalid={isPassword}
                   onChange={changeHandler}
@@ -106,7 +111,7 @@ export default function LoginForm() {
               </InputGroup>
               {isPassword ? (
                 <FormHelperText color="red.300">Enter Your Pass</FormHelperText>
-              ):null}
+              ) : null}
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -118,10 +123,10 @@ export default function LoginForm() {
                 <Text color={"teal.400"}>Forgot password?</Text>
               </Stack>
               <Button
-                bg={"teal.400"}
+                bg={isEmail || isPassword ? "red.500" : "teal.400"}
                 color={"white"}
                 _hover={{
-                  bg: "teal.500",
+                  bg: isEmail || isPassword ? "red.600" : "teal.400",
                 }}
                 type="submit"
               >
