@@ -12,6 +12,7 @@ export interface iproductsAttributes{
   title:string
   description:string
   price:number
+  
 }
 interface IproductsData {
     id: number;

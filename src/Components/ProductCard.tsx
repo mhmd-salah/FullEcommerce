@@ -28,7 +28,6 @@ function ProductCard({ attributes, id }: iproductsAttributesProps) {
       initial={{ translateX: -100, opacity: 0.0, scale: 0.66 }}
       whileInView={{ translateX: 0, opacity: 1, scale: 1 }}
       transition={{ duration: 0.1, delay: (id / 2) * 0.2 }}
-    
     >
       <Card
         bg={"rgb(231, 240, 240)"}

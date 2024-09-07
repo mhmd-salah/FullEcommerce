@@ -40,6 +40,11 @@ export default function LoginForm() {
   // }
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(!user.email&&!user.password) {
+      setIsEmail(true)
+      setIsPassword(true)
+      return
+    }
     if (!user.email) {
       setIsEmail(true);
       return;

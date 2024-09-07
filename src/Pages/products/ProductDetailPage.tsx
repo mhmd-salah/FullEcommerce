@@ -5,14 +5,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { iapiResponse } from "./ProductsPage";
 import { Button, Image } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { api } from "@/api";
 
 function ProductDetailPage() {
   const { id } = useParams();
   const nav = useNavigate();
   const goBack = () => nav(-1);
   const fetchProductDetail = async (): Promise<iapiResponse> => {
-    const res = await axios.get(
-      `${import.meta.env.VITE_SERVER_URL}/api/products/${id}?populate=thumbnail`
+    const res = await api.get(
+      `/api/products/${id}?populate=thumbnail`
     );
     return res.data;
   };
