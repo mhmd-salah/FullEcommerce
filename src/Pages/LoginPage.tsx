@@ -1,11 +1,13 @@
 import LoginForm from "@/Components/LoginForm";
+import { Navigate } from "react-router-dom";
 
-function LoginPage() {
+function LoginPage({ isAuthenticated }: { isAuthenticated :boolean}) {
+  // if (isAuthenticated) return <Navigate to="/" replace />;
   return (
     <div>
-      <LoginForm/>
+      {/* <LoginForm /> */}
     </div>
-  )
+  );
 }
 
 export default LoginPage

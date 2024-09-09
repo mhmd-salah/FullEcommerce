@@ -1,4 +1,3 @@
-  
 import {
   Box,
   Flex,
@@ -19,12 +18,13 @@ import {
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { NavLink as RouterLink } from "react-router-dom";
+import cookieService from "@/services/cookieService";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const Links = ["Products", "Projects", "Team"];
+const Links = ["Products", "Categories", "Team"];
 
 const NavLink = ({ children }: Props) => {
   return (
@@ -47,8 +47,11 @@ const NavLink = ({ children }: Props) => {
 
 export default function NavChakra() {
   const { colorMode, toggleColorMode } = useColorMode();
-
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+  const token = cookieService.get("jwt");
+  const logoutHandler = () => {
+    cookieService.remove("jwt");
+    window.location.reload();
+  };
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -56,53 +59,57 @@ export default function NavChakra() {
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
             <RouterLink to={"/"}>Home</RouterLink>
             {Links.map((link) => (
-              <NavLink key={link} >{link}</NavLink>
+              <NavLink key={link}>{link}</NavLink>
             ))}
           </HStack>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button as={RouterLink} to={"/login"}>
-                Login
-              </Button>
-
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
-                >
-                  <Avatar
-                    size={"sm"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
-                  />
-                </MenuButton>
-
-                <MenuList alignItems={"center"}>
-                  <br />
-                  <Center>
-                    <Avatar
-                      size={"2xl"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
-                    />
-                  </Center>
-                  <br />
-                  <Center>
-                    <p>Username</p>
-                  </Center>
-                  <br />
-                  <MenuDivider />
-                  <MenuItem>Your Servers</MenuItem>
-                  <MenuItem>Account Settings</MenuItem>
-                  <MenuItem>Logout</MenuItem>
-                </MenuList>
-              </Menu>
-
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
+
+              {token ? (
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                  >
+                    <Avatar
+                      size={"sm"}
+                      src={"https://avatars.dicebear.com/api/male/username.svg"}
+                    />
+                  </MenuButton>
+
+                  <MenuList alignItems={"center"}>
+                    <br />
+                    <Center>
+                      <Avatar
+                        size={"2xl"}
+                        src={
+                          "https://avatars.dicebear.com/api/male/username.svg"
+                        }
+                      />
+                    </Center>
+                    <br />
+                    <Center>
+                      <p>Username</p>
+                    </Center>
+                    <br />
+                    <MenuDivider />
+                    <MenuItem>Your Servers</MenuItem>
+                    <MenuItem>Account Settings</MenuItem>
+                    <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                  </MenuList>
+                </Menu>
+              ) : (
+                <Button as={RouterLink} to={"/login"}>
+                  Login
+                </Button>
+              )}
             </Stack>
           </Flex>
         </Flex>

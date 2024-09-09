@@ -13,7 +13,7 @@ function ProductDetailPage() {
   const goBack = () => nav(-1);
   const fetchProductDetail = async (): Promise<iapiResponse> => {
     const res = await api.get(
-      `/api/products/${id}?populate=thumbnail`
+      `/products/${id}?populate=thumbnail`
     );
     return res.data;
   };

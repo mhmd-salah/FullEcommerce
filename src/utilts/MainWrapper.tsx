@@ -1,4 +1,5 @@
 import { store } from "@/App/store";
+import AppSkeleton from "@/Pages/AppSkelaton";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
@@ -23,7 +24,7 @@ function MainWrapper({ children }: { children: ReactNode }) {
   }, []);
 
   return loading ? (
-    <h1>loading</h1>
+    <AppSkeleton/>
   ) : (
     <QueryClientProvider client={client}>
       <Provider store={store}>

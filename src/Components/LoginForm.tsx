@@ -16,13 +16,15 @@ import {
   InputGroup,
   FormHelperText,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-export default function LoginForm() {
+export default function LoginForm({isAuthenticated}:{isAuthenticated:boolean}) {
+  // if (!isAuthenticated) return <Navigate to="/" replace />;
+  
   const dispatch = useDispatch();
   const {loading,data,error} = useSelector(selectLogin)
-  console.log(data)
   const [user, setUser] = useState({
     identifier: "",
     password: "",
@@ -58,6 +60,7 @@ export default function LoginForm() {
     } else setIsPassword(false);
 
     dispatch(userLogin(user));
+    
   };
   return (
     <Flex
@@ -66,6 +69,7 @@ export default function LoginForm() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
+      
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>

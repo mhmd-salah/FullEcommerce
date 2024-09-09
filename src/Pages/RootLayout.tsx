@@ -1,13 +1,15 @@
-import { Outlet } from "react-router-dom";
+import {  Navigate, Outlet } from "react-router-dom";
 import NavChakra from "@/Components/NavChakra";
 
-function RootLayout() {
+function RootLayout({isAuthenticated}:{isAuthenticated:boolean}) {
+  // if(!isAuthenticated) return <Navigate to="/login" replace/>
+  console.log(isAuthenticated)
   return (
     <>
-      <NavChakra/>
-      <Outlet/>
+      <NavChakra />
+      <Outlet />
     </>
-  )
+  );
 }
 
 export default RootLayout

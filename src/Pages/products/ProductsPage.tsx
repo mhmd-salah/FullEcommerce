@@ -6,20 +6,37 @@ import { useQuery } from "react-query";
 import SkeletonCards from "../../Components/SkeletonCards";
 
 
-
-export interface iproductsAttributes{
-  id:number;
-  title:string
-  description:string
-  price:number
-  
+export interface Iattr {
+  data:{
+    data:{
+      attributes:{
+        title: string;
+        description: string;
+        price: number;
+      }
+    }
+  }
 }
-interface IproductsData {
-    id: number;
-    attributes: iproductsAttributes;
+
+export interface iproductsAttributes {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  thumbnail?: {
+    data: {
+      attributes: {
+        url: string;
+      }
+    }
+  };}
+export interface IproductsData {
+  id: number;
+  attributes: iproductsAttributes;
 }
 export interface iapiResponse{
   data:IproductsData[]
+  isLoading?: boolean;
 }
 function ProductsPage() {
   const getProductsList = async ():Promise<iapiResponse> => {

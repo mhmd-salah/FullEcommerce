@@ -5,7 +5,7 @@ import NavChakra from '@/Components/NavChakra';
 function ProductsLayout() {
   return (
     <>
-      <NavChakra/>
+      {/* <NavChakra/> */}
       <div className="flex">
         <Aside/>
         <Outlet />
