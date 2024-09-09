@@ -1,5 +1,6 @@
 import { api } from "@/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface IinitialState {
   loading: boolean;
@@ -15,10 +16,10 @@ const initialState: IinitialState = {
 
 export const userLogin = createAsyncThunk(
   "login/userLogin",
-  async (_, thunkAPi) => {
+  async (user, thunkAPi) => {
     const { rejectWithValue } = thunkAPi;
     try {
-      const { data } = await api.get("/auth/local");
+      const { data } = await api.post("/auth/local",user);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -33,18 +34,19 @@ const loginSlice = createSlice({
   extraReducers:(builder) => {
     builder.addCase(userLogin.pending, (state) => {
       state.loading = true;
-    }),
-    builder.addCase(userLogin.fulfilled, (state,{payload})=>{
+    })
+    .addCase(userLogin.fulfilled, (state,{payload})=>{
       state.loading = false;
       state.data = payload;
       state.error = null
-    }),
-    builder.addCase(userLogin.rejected, (state,{payload})=>{
+    })
+    .addCase(userLogin.rejected, (state,{payload})=>{
       state.loading = false;
       state.data = [];
       state.error = payload;
     })
   }
 })
-export const loginReducer = loginSlice.reducer
 
+export default loginSlice.reducer;
+export const selectLogin = (state:RootState)=>state.login;

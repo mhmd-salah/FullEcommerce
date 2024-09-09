@@ -1,3 +1,4 @@
+import { selectLogin, userLogin } from "@/App/feathers/loginSlice";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Flex,
@@ -16,11 +17,14 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const {loading,data,error} = useSelector(selectLogin)
+  console.log(data)
   const [user, setUser] = useState({
-    email: "",
+    identifier: "",
     password: "",
   });
   const [isEmail, setIsEmail] = useState(false);
@@ -40,18 +44,20 @@ export default function LoginForm() {
   // }
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!user.email&&!user.password) {
-      setIsEmail(true)
-      setIsPassword(true)
-      return
+    if (!user.identifier && !user.password) {
+      setIsEmail(true);
+      setIsPassword(true);
+      return;
     }
-    if (!user.email) {
+    if (!user.identifier) {
       setIsEmail(true);
       return;
-    }else setIsEmail(false)
-    if(!user.password){
-      setIsPassword(true)
-    }else setIsPassword(false)
+    } else setIsEmail(false);
+    if (!user.password) {
+      setIsPassword(true);
+    } else setIsPassword(false);
+
+    dispatch(userLogin(user));
   };
   return (
     <Flex
@@ -79,10 +85,10 @@ export default function LoginForm() {
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
               <Input
-                name="email"
+                name="identifier"
                 type="email"
                 focusBorderColor={isPassword ? "red.600" : "teal.400"}
-                value={user.email}
+                value={user.identifier}
                 isInvalid={isEmail}
                 onChange={changeHandler}
               />
@@ -134,6 +140,7 @@ export default function LoginForm() {
                   bg: isEmail || isPassword ? "red.600" : "teal.400",
                 }}
                 type="submit"
+                isLoading={loading}
               >
                 Sign in
               </Button>
