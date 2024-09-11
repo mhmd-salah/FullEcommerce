@@ -1,7 +1,10 @@
-function AppSkelaton() {
-  return <div className="h-screen w-screen flex justify-center items-center">
-    loading ....
-  </div>;
+function AppSkeleton() {
+  return (
+    <div className="appSkeleton h-screen w-screen bg-teal-900 flex justify-center items-center absolute ">
+      {/* <div className="w-full h-full bg-teal-600 "></div> */}
+      <h1 className="text-4xl text-white">Loading...</h1>
+    </div>
+  );
 }
 
-export default AppSkelaton;
+export default AppSkeleton;

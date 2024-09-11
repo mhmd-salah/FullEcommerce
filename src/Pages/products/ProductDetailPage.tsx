@@ -1,16 +1,23 @@
 import { motion } from "framer-motion";
-import axios from "axios";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { iapiResponse } from "./ProductsPage";
 import { Button, Image } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { api } from "@/api";
+import { addToCart } from "@/App/feathers/cartSlice";
+import { useDispatch } from "react-redux";
 
 function ProductDetailPage() {
-  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { id } = useParams(); 
   const nav = useNavigate();
   const goBack = () => nav(-1);
+
+  const addToCartHandler= ()=>{
+    dispatch(addToCart({ ...data?.data }));
+  }
+
   const fetchProductDetail = async (): Promise<iapiResponse> => {
     const res = await api.get(
       `/products/${id}?populate=thumbnail`
@@ -47,7 +54,7 @@ function ProductDetailPage() {
             <span className="text-2xl block">
               ${data.data.attributes.price}
             </span>
-            <Button colorScheme="teal" variant={"outline"}>
+            <Button colorScheme="teal" variant={"outline"} onClick={addToCartHandler}>
               Add To Card
             </Button>
           </div>

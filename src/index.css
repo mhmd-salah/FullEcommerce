@@ -5,10 +5,10 @@
 .active {
   color: teal;
 }
-aside .active{
+aside .active {
   color: teal;
   background-color: #fafafa;
-  @apply shadow-sm
+  @apply shadow-sm;
 }
 @layer base {
   :root {
@@ -73,3 +73,5 @@ aside .active{
     @apply bg-background text-foreground;
   }
 }
+
+

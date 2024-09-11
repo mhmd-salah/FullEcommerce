@@ -19,6 +19,8 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { NavLink as RouterLink } from "react-router-dom";
 import cookieService from "@/services/cookieService";
+import { useAppSelector } from "@/App/Hooks";
+import { selectCartProduct } from "@/App/feathers/cartSlice";
 
 interface Props {
   children: React.ReactNode;
@@ -46,6 +48,7 @@ const NavLink = ({ children }: Props) => {
 };
 
 export default function NavChakra() {
+  const {cartProducts} =  useAppSelector(selectCartProduct)
   const { colorMode, toggleColorMode } = useColorMode();
   const token = cookieService.get("jwt");
   const logoutHandler = () => {
@@ -68,6 +71,8 @@ export default function NavChakra() {
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
+
+              <Button onClick={()=>{}}>Cart ({cartProducts.length})</Button>
 
               {token ? (
                 <Menu>
@@ -110,6 +115,7 @@ export default function NavChakra() {
                   Login
                 </Button>
               )}
+
             </Stack>
           </Flex>
         </Flex>

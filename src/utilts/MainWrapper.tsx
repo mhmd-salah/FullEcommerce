@@ -24,17 +24,16 @@ function MainWrapper({ children }: { children: ReactNode }) {
   }, []);
 
   return loading ? (
-    <AppSkeleton/>
+    <AppSkeleton />
   ) : (
     <QueryClientProvider client={client}>
       <Provider store={store}>
-      <BrowserRouter>
-        <ChakraProvider>{children}</ChakraProvider>
-      </BrowserRouter>
+        <BrowserRouter>
+          <ChakraProvider>{children}</ChakraProvider>
+        </BrowserRouter>
       </Provider>
     </QueryClientProvider>
   );
 }
 
 export default MainWrapper;
-
