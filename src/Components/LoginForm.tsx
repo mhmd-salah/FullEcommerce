@@ -1,4 +1,4 @@
-import { selectLogin, userLogin } from "@/App/feathers/loginSlice";
+import {  selectLogin, userLogin } from "@/App/feathers/loginSlice";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Flex,
@@ -16,12 +16,12 @@ import {
   InputGroup,
   FormHelperText,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 export default function LoginForm({isAuthenticated}:{isAuthenticated:boolean}) {
-  // if (!isAuthenticated) return <Navigate to="/" replace />;
+  if (isAuthenticated) return <Navigate to="/" replace />;
   
   const dispatch = useDispatch();
   const {loading,data,error} = useSelector(selectLogin)
@@ -59,7 +59,7 @@ export default function LoginForm({isAuthenticated}:{isAuthenticated:boolean}) {
       setIsPassword(true);
     } else setIsPassword(false);
 
-    dispatch(userLogin(user));
+    dispatch(userLogin(user ) as any);
     
   };
   return (
