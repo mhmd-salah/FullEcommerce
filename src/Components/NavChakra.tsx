@@ -21,6 +21,8 @@ import { NavLink as RouterLink } from "react-router-dom";
 import cookieService from "@/services/cookieService";
 import { useAppSelector } from "@/App/Hooks";
 import { selectCartProduct } from "@/App/feathers/cartSlice";
+import { onOpenCartDrawer } from "@/App/feathers/globalSlice";
+import { useDispatch } from "react-redux";
 
 interface Props {
   children: React.ReactNode;
@@ -48,6 +50,7 @@ const NavLink = ({ children }: Props) => {
 };
 
 export default function NavChakra() {
+  const dispatch = useDispatch();
   const {cartProducts} =  useAppSelector(selectCartProduct)
   const { colorMode, toggleColorMode } = useColorMode();
   const token = cookieService.get("jwt");
@@ -55,6 +58,7 @@ export default function NavChakra() {
     cookieService.remove("jwt");
     window.location.reload();
   };
+  const onOpen = () => dispatch(onOpenCartDrawer());
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.700")} px={4}>
@@ -72,7 +76,7 @@ export default function NavChakra() {
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
 
-              <Button onClick={()=>{}}>Cart ({cartProducts.length})</Button>
+              <Button onClick={onOpen}>Cart ({cartProducts.length})</Button>
 
               {token ? (
                 <Menu>

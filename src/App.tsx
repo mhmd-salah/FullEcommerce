@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./Pages";
 import AboutPage from "./Pages/CategoryPage";
 import ProductsPage from "./Pages/ProductsPage";
@@ -10,14 +10,16 @@ import Categoies from "./Pages/products/Categories";
 import CartPage from "./Pages/CartPage";
 import cookieService from "./services/cookieService";
 import LoginForm from "./Components/LoginForm";
+import CartDrawer from "./Components/CartDrawer";
 function App() {
+  const location = useLocation()
   const client = new QueryClient();
   const token = cookieService.get("jwt");
   console.log(token)
   return (
     <>
       <QueryClientProvider client={client}>
-        <Routes>
+        <Routes location={location} key={location.pathname}>
           <Route path="/" element={<RootLayout isAuthenticated={token}/>}>
             <Route index element={<HomePage />} />
             <Route path="/categories" element={<AboutPage />} />
@@ -34,6 +36,7 @@ function App() {
           />
         </Routes>
       </QueryClientProvider>
+      <CartDrawer/>
     </>
   );
 }
