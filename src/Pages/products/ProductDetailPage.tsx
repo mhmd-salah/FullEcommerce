@@ -7,6 +7,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { api } from "@/api";
 import { addToCart } from "@/App/feathers/cartSlice";
 import { useDispatch } from "react-redux";
+import { Carousel, CarouselContent, CarouselItem } from "@/Components/ui/carousel";
 
 function ProductDetailPage() {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function ProductDetailPage() {
         <motion.div
           initial={{ opacity: 0.4, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          className="container flex items-center justify-between "
+          className="flex-col-reverse lg:flex-row container flex items-center justify-between "
         >
           <div className="space-y-3">
             <h1 className="text-4xl">{data.data.attributes.title}</h1>
@@ -54,16 +55,34 @@ function ProductDetailPage() {
             <span className="text-2xl block">
               ${data.data.attributes.price}
             </span>
-            <Button colorScheme="teal" variant={"outline"} onClick={addToCartHandler}>
+            <Button
+              colorScheme="teal"
+              variant={"outline"}
+              onClick={addToCartHandler}
+            >
               Add To Card
             </Button>
           </div>
-          <div>
-            <Image
-              width={400}
-              src={`${baseUrl}${data.data.attributes.thumbnail.data.attributes.url}`}
-              fallbackSrc="https://via.placeholder.com/150"
-            />
+          <div className="w- " >
+            <Carousel className="w-96 cursor-grab">
+              <CarouselContent>
+                <CarouselItem>
+                  <Image
+                    width={400}
+                    className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+                    src={`${baseUrl}${data.data.attributes.thumbnail.data.attributes.url}`}
+                    fallbackSrc="https://via.placeholder.com/150"
+                  />
+                </CarouselItem>
+                <CarouselItem>
+                  <Image
+                    width={400}
+                    src={`${baseUrl}${data.data.attributes.thumbnail.data.attributes.url}`}
+                    fallbackSrc="https://via.placeholder.com/150"
+                  />
+                </CarouselItem>
+              </CarouselContent>
+            </Carousel>
           </div>
         </motion.div>
       )}

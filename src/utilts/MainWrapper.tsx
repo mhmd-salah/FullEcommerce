@@ -2,7 +2,6 @@ import { store } from "@/App/store";
 import AppSkeleton from "@/Pages/AppSkelaton";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";

@@ -67,3 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.active {
+  background-color: #f9f9f9;
+}
