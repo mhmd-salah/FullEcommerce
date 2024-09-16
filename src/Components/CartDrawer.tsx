@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CartDrawerItem from "./CartDrawerItem";
 
 function CartDrawer() {
   const dispatch = useDispatch<useAppDispatch>();
@@ -35,7 +36,8 @@ function CartDrawer() {
         <DrawerHeader>Shopping Cart</DrawerHeader>
 
         <DrawerBody>
-          <Input placeholder="Type here..." />
+          {/* <Input placeholder="Type here..." /> */}
+          <CartDrawerItem title="product" quantity={2} />
         </DrawerBody>
 
         <DrawerFooter>
