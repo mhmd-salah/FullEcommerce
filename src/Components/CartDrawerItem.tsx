@@ -1,39 +1,60 @@
+import { removeFromCart } from "@/App/feathers/cartSlice";
+import { useAppDispatch } from "@/App/store";
 import {
   Box,
   Button,
   Center,
-  Divider,
   Flex,
   Image,
   Spacer,
+  Text,
 } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
 interface Iprops {
-  title: string;
+  id:number,
+  attributes:Iattr
   quantity: number;
 }
 
-function CartDrawerItem({
-  title = "unknown",
-  quantity = 1,
-}: Iprops) {
+interface Iattr {
+  title: string;
+  thumbnail:{
+    data:{
+      attributes:{
+        url:string
+      }
+    }
+  }
+}
+
+function CartDrawerItem({id,attributes,quantity}:Iprops) {
+  const dispatch = useDispatch<useAppDispatch>()
+  if(attributes)console.log(attributes);
   return (
     <div className="border-b">
       <Flex py={2} alignItems={"center"}>
         <Box mr={1}>
           <Image
-            src="https://placehold.co/50"
+
+            src={`${import.meta.env.VITE_SERVER_URL}${
+              attributes && attributes.thumbnail.data.attributes.url
+            }`}
             borderRadius={50}
-            sizes="50"
+            w={45}
             objectFit={"cover"}
           />
         </Box>
         <Box className="text-sm text-left">
-          <Box>{title}</Box>
-          <Box>Quantity : {quantity}</Box>
+          <Text>{attributes && attributes.title}</Text>
+          <Text>Quantity : {quantity}</Text>
         </Box>
         <Spacer />
         <Center>
-          <Button colorScheme="red" size={"xs"}>
+          <Button
+            colorScheme="red"
+            size={"xs"}
+            onClick={() => dispatch(removeFromCart(id))}
+          >
             Remove
           </Button>
         </Center>

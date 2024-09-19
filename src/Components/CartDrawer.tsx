@@ -12,17 +12,20 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Input,
+  Text,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { clearAll, removeFromCart, selectCartProduct } from "@/App/feathers/cartSlice";
 import CartDrawerItem from "./CartDrawerItem";
 
 function CartDrawer() {
   const dispatch = useDispatch<useAppDispatch>();
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpenCartDrawer } = useSelector(selectGlobal);
+  const { cartProducts } = useSelector(selectCartProduct);
   const onClose = () => dispatch(onCloseCartDrawer());
+  console.log(cartProducts)
   return (
     <Drawer
       isOpen={isOpenCartDrawer}
@@ -37,11 +40,16 @@ function CartDrawer() {
 
         <DrawerBody>
           {/* <Input placeholder="Type here..." /> */}
-          <CartDrawerItem title="product" quantity={2} />
+          {cartProducts.length? cartProducts.map((item:any) =>(
+            <CartDrawerItem
+            // key={item&&item.id}
+              {...item}
+            />
+          )):<Text color={"gray"}>Cart Drawer is empty</Text>}
         </DrawerBody>
 
         <DrawerFooter>
-          <Button variant="outline" colorScheme="red" mr={3} onClick={() => {}}>
+          <Button variant="outline" colorScheme="red" mr={3} onClick={() =>dispatch(clearAll())}>
             Clear All
           </Button>
           {/* <Button colorScheme="blue">Save</Button> */}

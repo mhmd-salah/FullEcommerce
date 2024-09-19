@@ -1,7 +1,7 @@
 import { createStandaloneToast } from "@chakra-ui/react";
 
 export interface IcartItem {
-  id?: number;
+  id: number;
   quantity: number;
 }
 

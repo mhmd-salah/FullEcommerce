@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 import { iproductsAttributes } from "../Pages/products/ProductsPage";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface iproductsAttributesProps {
   id: number;

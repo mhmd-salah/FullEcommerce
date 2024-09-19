@@ -4,6 +4,7 @@ import ProductCard from "../../Components/ProductCard";
 import axios from "axios";
 import { useQuery } from "react-query";
 import SkeletonCards from "../../Components/SkeletonCards";
+import { api } from "@/api";
 
 
 export interface Iattr {
@@ -41,7 +42,7 @@ export interface iapiResponse{
 function ProductsPage() {
   const getProductsList = async ():Promise<iapiResponse> => {
     const { data } = await axios.get(
-      `${import.meta.env.VITE_SERVER_URL}/api/products?populate=thumbnail`
+      `${api}/api/products?populate=thumbnail`
     );
     return data;
   };
