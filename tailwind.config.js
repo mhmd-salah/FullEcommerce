@@ -71,6 +71,9 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage:{
+        'hero-img':"url('./public/landingimg.jpg')"
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

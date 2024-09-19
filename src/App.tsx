@@ -11,6 +11,8 @@ import CartPage from "./Pages/CartPage";
 import cookieService from "./services/cookieService";
 import LoginForm from "./Components/LoginForm";
 import CartDrawer from "./Components/CartDrawer";
+import AdminDashboard from "./Pages/dashboard";
+import DashboardLayout from "./Pages/dashboard/DashboardLayout";
 function App() {
   const location = useLocation()
   const client = new QueryClient();
@@ -20,7 +22,7 @@ function App() {
     <>
       <QueryClientProvider client={client}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<RootLayout isAuthenticated={token}/>}>
+          <Route path="/" element={<RootLayout isAuthenticated={token} />}>
             <Route index element={<HomePage />} />
             <Route path="/categories" element={<AboutPage />} />
             <Route path="/cart" element={<CartPage />} />
@@ -30,13 +32,21 @@ function App() {
               <Route path="categories" element={<Categoies />} />
             </Route>
           </Route>
+          {/* dashboard routes */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="products" element={<h1>products</h1>} />
+            <Route path="categories" element={<h1>categories</h1>} />
+          </Route>
+          {/* login route */}
           <Route
             path="/login"
             element={<LoginForm isAuthenticated={token} />}
           />
+          <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
       </QueryClientProvider>
-      <CartDrawer/>
+      <CartDrawer />
     </>
   );
 }
