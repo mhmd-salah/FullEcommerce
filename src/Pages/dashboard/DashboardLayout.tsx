@@ -22,11 +22,9 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import {Link as RouterLink} from 'react-router-dom';
+import {NavLink as RouterLink} from 'react-router-dom';
 import {
   FiHome,
-  FiStar,
-  FiSettings,
   FiMenu,
   FiBell,
   FiChevronDown,
@@ -57,8 +55,8 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { to:"/dashboard", name: "Dashboard", icon: FiHome },
-  { to:"/dashboard/products", name: "Products", icon: MdProductionQuantityLimits },
-  { to:"/dashboard/categories", name: "Categories", icon: MdOutlineCategory },
+  { to:"products", name: "Products", icon: MdProductionQuantityLimits },
+  { to:"categories", name: "Categories", icon: MdOutlineCategory },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -98,7 +96,7 @@ const NavItem = ({ icon, children,to, ...rest }: NavItemProps) => {
     >
       <Flex
         align="center"
-        p="4"
+        p="2"
         mx="4"
         borderRadius="lg"
         role="group"

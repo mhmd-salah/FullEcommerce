@@ -13,6 +13,7 @@ import LoginForm from "./Components/LoginForm";
 import CartDrawer from "./Components/CartDrawer";
 import AdminDashboard from "./Pages/dashboard";
 import DashboardLayout from "./Pages/dashboard/DashboardLayout";
+import DashboardProducts from "./Pages/dashboard/DashboardProducts";
 function App() {
   const location = useLocation()
   const client = new QueryClient();
@@ -34,8 +35,8 @@ function App() {
           </Route>
           {/* dashboard routes */}
           <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="products" element={<h1>products</h1>} />
+            <Route index  element={<AdminDashboard />} />
+            <Route path="products" element={<DashboardProducts/>} />
             <Route path="categories" element={<h1>categories</h1>} />
           </Route>
           {/* login route */}
