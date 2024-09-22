@@ -1,7 +1,6 @@
 import { store } from "@/App/store";
-import AppSkeleton from "@/Pages/AppSkelaton";
 import { ChakraProvider } from "@chakra-ui/react";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -14,17 +13,7 @@ const client = new QueryClient({
   },
 });
 function MainWrapper({ children }: { children: ReactNode }) {
-  const [loading, setLoading] = useState<boolean>(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  return loading ? (
-    <AppSkeleton />
-  ) : (
+  return (
     <QueryClientProvider client={client}>
       <Provider store={store}>
         <BrowserRouter>

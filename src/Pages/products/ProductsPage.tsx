@@ -42,7 +42,7 @@ export interface iapiResponse{
 function ProductsPage() {
   const getProductsList = async ():Promise<iapiResponse> => {
     const { data } = await axios.get(
-      `${api}/api/products?populate=thumbnail`
+      `${api}/products?populate=thumbnail`
     );
     return data;
   };

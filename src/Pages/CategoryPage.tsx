@@ -1,5 +1,4 @@
-
-function category() {
+function CategoryPage() {
   return (
     <>
       <h1>Category page</h1>
@@ -7,4 +6,4 @@ function category() {
   );
 }
 
-export default category;
+export default CategoryPage;
