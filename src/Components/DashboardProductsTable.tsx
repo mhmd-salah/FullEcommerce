@@ -22,29 +22,19 @@ function DashboardProductsTable() {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr>
+          {data?.data?.map((product: any) => (
+            <Tr>
+              <Td>{product?.id}</Td>
+              <Td>{product?.attributes.title}</Td>
+              <Td>{product?.attributes?.category?.attributes?.title || "Un Known" }</Td>
+              <Td isNumeric >{product?.attributes?.price || "Un Known" }</Td>
+              <Td isNumeric >{product?.attributes?.stock || "Un Known" }</Td>
+              <Td>
+                
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
       </Table>
     </TableContainer>
   );

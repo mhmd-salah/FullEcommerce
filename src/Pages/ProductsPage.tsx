@@ -1,5 +1,4 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import ProductCard from "../Components/ProductCard";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -19,7 +18,7 @@ function ProductsPage() {
   })
 
   if(isLoading) return (
-    <motion.div initial={{ opacity: 0.7 }} whileInView={{ opacity: 1 }}>
+    <div  >
       <Grid
         m={3}
         templateColumns="repeat(4,minmax(220px,1fr))"
@@ -32,11 +31,11 @@ function ProductsPage() {
           </GridItem>
         ))}
       </Grid>
-    </motion.div>
+    </div>
   );
   
   return (
-    <motion.div style={{ height: 2000 }}>
+    <div>
       <Grid
         m={6}
         templateColumns="repeat(auto-fill , minmax(250px,1fr))"
@@ -48,7 +47,7 @@ function ProductsPage() {
           ))
         }
       </Grid>
-    </motion.div>
+    </div>
   );
 }
 

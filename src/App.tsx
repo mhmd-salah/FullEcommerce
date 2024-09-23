@@ -29,7 +29,14 @@ function App() {
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<RootLayout isAuthenticated={token} />}>
-              <Route index element={<HomePage />} />
+              <Route
+                index
+                element={
+                  <PageWrapper>
+                    <HomePage />
+                  </PageWrapper>
+                }
+              />
               <Route
                 path="/categories"
                 element={
@@ -38,7 +45,14 @@ function App() {
                   </PageWrapper>
                 }
               />
-              <Route path="/cart" element={<CartPage />} />
+              <Route
+                path="/cart"
+                element={
+                  <PageWrapper>
+                    <CartPage />
+                  </PageWrapper>
+                }
+              />
               <Route path="/products" element={<ProductsLayout />}>
                 <Route
                   index
