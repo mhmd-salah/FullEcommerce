@@ -68,9 +68,30 @@ function App() {
             </Route>
             {/* dashboard routes */}
             <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="products" element={<DashboardProducts />} />
-              <Route path="categories" element={<h1>categories</h1>} />
+              <Route
+                index
+                element={
+                  <PageWrapper>
+                    <AdminDashboard />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="products"
+                element={
+                  <PageWrapper>
+                    <DashboardProducts />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="categories"
+                element={
+                  <PageWrapper>
+                    <h1>categories</h1>
+                  </PageWrapper>
+                }
+              />
             </Route>
             {/* login route */}
             <Route
