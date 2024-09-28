@@ -9,7 +9,7 @@ function HomePage() {
   if (!token) <Navigate to={"/login"} replace />;
   const ref = useRef(null);
   const isInView = useInView(ref);
-  console.log("the element in view ," + isInView);
+  // console.log("the element in view ," + isInView);
   useEffect(() => {}, [isInView]);
   return (
     <>

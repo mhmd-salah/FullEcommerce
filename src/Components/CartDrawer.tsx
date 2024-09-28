@@ -25,7 +25,7 @@ function CartDrawer() {
   const { isOpenCartDrawer } = useSelector(selectGlobal);
   const { cartProducts } = useSelector(selectCartProduct);
   const onClose = () => dispatch(onCloseCartDrawer());
-  console.log(cartProducts)
+  // console.log(cartProducts)
   return (
     <Drawer
       isOpen={isOpenCartDrawer}

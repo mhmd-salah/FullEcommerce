@@ -25,7 +25,15 @@ function DashboardProductsTable() {
   else
     return (
       <>
-        <CustomAlertDialog isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+        <CustomAlertDialog
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
+          title="Are you sure"
+          desc="Delete Product"
+          cancelTxt="cancel"
+          okTxt="Delete"
+        />
         <TableContainer>
           <Table variant="striped" colorScheme="teal">
             <TableCaption>Imperial to metric conversion factors</TableCaption>
@@ -42,7 +50,7 @@ function DashboardProductsTable() {
             </Thead>
             <Tbody>
               {data?.data?.map((product: any) => (
-                <Tr>
+                <Tr key={product.id}>
                   <Td>{product?.id}</Td>
                   <Td>{product?.attributes.title}</Td>
                   <Td>
@@ -62,11 +70,7 @@ function DashboardProductsTable() {
                     >
                       V
                     </Button>
-                    <Button
-                      colorScheme="red"
-                      variant="solid"
-                      onClick={onOpen}
-                    >
+                    <Button colorScheme="red" variant="solid" onClick={onOpen}>
                       D
                     </Button>
                     <Button
@@ -74,7 +78,7 @@ function DashboardProductsTable() {
                       variant="solid"
                       onClick={() => {}}
                     >
-                      E
+                      Eذ
                     </Button>
                   </Td>
                 </Tr>

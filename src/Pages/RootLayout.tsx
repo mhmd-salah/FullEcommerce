@@ -3,7 +3,7 @@ import NavChakra from "@/Components/NavChakra";
 
 function RootLayout({isAuthenticated}:{isAuthenticated:boolean}) {
   // if(!isAuthenticated) return <Navigate to="/login" replace/>
-  console.log(isAuthenticated)
+  // console.log(isAuthenticated)
   return (
     <>
       <NavChakra />

@@ -3,7 +3,14 @@ import "./index.css";
 import MainWrapper from "./utilts/MainWrapper.tsx";
 import App from "./App.tsx";
 
-createRoot(document.getElementById("root")!).render(
+const root = createRoot(document.getElementById("root")!,{
+  onRecoverableError:(error, errorInfo)=> {
+    console.error(error," --------------------------------- ")
+    console.info(errorInfo)
+  },
+})
+
+root.render(
   <MainWrapper>
     <App />
   </MainWrapper>

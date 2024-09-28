@@ -17,14 +17,16 @@ import DashboardProducts from "./Pages/dashboard/DashboardProducts";
 import NotFoundPage from "./Pages/NotFoundPage";
 import { AnimatePresence } from "framer-motion";
 import PageWrapper from "./Components/PageWrapper";
+// import Test from "./Components/Test";
 
 function App() {
   const location = useLocation();
   const client = new QueryClient();
   const token = cookieService.get("jwt");
-  console.log(token);
+
   return (
     <>
+    {/* <Test/> */}
       <QueryClientProvider client={client}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>

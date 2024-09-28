@@ -7,7 +7,6 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Button,
-  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -15,10 +14,18 @@ export default function CustomAlertDialog({
   isOpen,
   onOpen,
   onClose,
+  title,
+  desc,
+  cancelTxt = "cancel",
+  okTxt = "Ok"
 }: {
   isOpen: any;
   onOpen: any;
   onClose: any;
+  title:string;
+  desc:string;
+  cancelTxt:string;
+  okTxt:string;
 }) {
   // const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -37,18 +44,17 @@ export default function CustomAlertDialog({
         <AlertDialogOverlay backdropBlur={88}/>
 
         <AlertDialogContent>
-          <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+          <AlertDialogHeader>{title}</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            Are you sure you want to discard all of your notes? 44 words will be
-            deleted.
+            {desc}
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
-              No
+              {cancelTxt}
             </Button>
             <Button colorScheme="red" ml={3}>
-              Yes
+              {okTxt}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
