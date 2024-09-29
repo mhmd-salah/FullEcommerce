@@ -1,4 +1,4 @@
-import { useGetDashboardProductsQuery } from "@/App/services/apiSlice";
+import {  useDeleteDashboardProductMutation, useGetDashboardProductsQuery } from "@/App/services/Products";
 import CustomAlertDialog from "@/shared/AlertDialog";
 import {
   Button,
@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 
 function DashboardProductsTable() {
   const { data, isLoading } = useGetDashboardProductsQuery({ page: 1 });
+  const [destroyProduct, { isLoading: isDestrying }] = useDeleteDashboardProductMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   if (isLoading)
@@ -33,6 +34,7 @@ function DashboardProductsTable() {
           desc="Delete Product"
           cancelTxt="cancel"
           okTxt="Delete"
+          onOkHandler={() => destroyProduct(3)}
         />
         <TableContainer>
           <Table variant="striped" colorScheme="teal">
@@ -78,7 +80,7 @@ function DashboardProductsTable() {
                       variant="solid"
                       onClick={() => {}}
                     >
-                      Eذ
+                      E
                     </Button>
                   </Td>
                 </Tr>
@@ -88,6 +90,6 @@ function DashboardProductsTable() {
         </TableContainer>
       </>
     );
-}
 
+}
 export default DashboardProductsTable;

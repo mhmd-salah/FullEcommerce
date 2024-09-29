@@ -17,15 +17,17 @@ export default function CustomAlertDialog({
   title,
   desc,
   cancelTxt = "cancel",
-  okTxt = "Ok"
+  okTxt = "Ok",
+  onOkHandler,
 }: {
   isOpen: any;
   onOpen: any;
   onClose: any;
-  title:string;
-  desc:string;
-  cancelTxt:string;
-  okTxt:string;
+  title: string;
+  desc: string;
+  cancelTxt: string;
+  okTxt: string;
+  onOkHandler?: () => any;
 }) {
   // const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -41,19 +43,17 @@ export default function CustomAlertDialog({
         isOpen={isOpen}
         isCentered
       >
-        <AlertDialogOverlay backdropBlur={88}/>
+        <AlertDialogOverlay backdropBlur={88} />
 
         <AlertDialogContent>
           <AlertDialogHeader>{title}</AlertDialogHeader>
           <AlertDialogCloseButton />
-          <AlertDialogBody>
-            {desc}
-          </AlertDialogBody>
+          <AlertDialogBody>{desc}</AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
               {cancelTxt}
             </Button>
-            <Button colorScheme="red" ml={3}>
+            <Button colorScheme="red" ml={3} onClick={onOkHandler}>
               {okTxt}
             </Button>
           </AlertDialogFooter>

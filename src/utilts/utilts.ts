@@ -26,5 +26,6 @@ export const addItemToShoppingCart = (
       item.id === cartItem.id ? { ...item, quantity: item.quantity + 1 } : null
     );
   }
+  
   return [...shoppingCart, { ...cartItem, quantity: 1 }];
 };
