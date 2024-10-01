@@ -18,6 +18,7 @@ export default function CustomAlertDialog({
   desc,
   cancelTxt = "cancel",
   okTxt = "Ok",
+  isLoading,
   onOkHandler,
 }: {
   isOpen: any;
@@ -27,6 +28,7 @@ export default function CustomAlertDialog({
   desc: string;
   cancelTxt: string;
   okTxt: string;
+  isLoading:boolean;
   onOkHandler?: () => any;
 }) {
   // const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,7 +55,12 @@ export default function CustomAlertDialog({
             <Button ref={cancelRef} onClick={onClose}>
               {cancelTxt}
             </Button>
-            <Button colorScheme="red" ml={3} onClick={onOkHandler}>
+            <Button
+              colorScheme="red"
+              ml={3}
+              onClick={onOkHandler}
+              isLoading={isLoading}
+            >
               {okTxt}
             </Button>
           </AlertDialogFooter>

@@ -1,18 +1,29 @@
-const useState = (defaultState) => {
-  let state = defaultState;
-  let setState = (newState) => {
-    if (typeof newState == "function") state = newState(state);
-    else state = newState;
-  };
-  
-  return [
-    setState, // setter
-    () => state, // getter
-  ];
-};
 
-const [setNumber, getNumber] = useState(1);
-setNumber(2);
-setNumber(3);
-setNumber((prev) => prev + 10);
-console.log(getNumber());
+
+function test(){
+  console.log("test")
+}
+test.age=()=>{
+  console.log("mohamed salah")
+}
+
+test.User = {
+  name:"MOHAMED",
+  age:21,
+  liveIn:"Egypt"
+}
+
+function one(o){
+  return function(t){
+    return o + t
+  }
+}
+
+let addNumToThree = one(3)
+console.log(addNumToThree(10));
+
+
+test()
+test.age();
+console.log(test.User)
+

@@ -1,4 +1,7 @@
-import {  useDeleteDashboardProductMutation, useGetDashboardProductsQuery } from "@/App/services/Products";
+import {
+  useDeleteDashboardProductMutation,
+  useGetDashboardProductsQuery,
+} from "@/App/services/Products";
 import CustomAlertDialog from "@/shared/AlertDialog";
 import {
   Button,
@@ -12,13 +15,21 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function DashboardProductsTable() {
   const { data, isLoading } = useGetDashboardProductsQuery({ page: 1 });
-  const [destroyProduct, { isLoading: isDestrying }] = useDeleteDashboardProductMutation();
+  const [destroyProduct, { isLoading: isDestroying, isSuccess }] =
+    useDeleteDashboardProductMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [idProduct, setIdProduct] = useState<null | number>(0);
+  useEffect(() => {
+    if (isSuccess) {
+      setIdProduct(null)
+      onClose();
+    }
+  }, [isSuccess]);
   if (isLoading)
     return (
       <div className="text-2xl text-gray-700 font-light">Table Loading...</div>
@@ -27,6 +38,7 @@ function DashboardProductsTable() {
     return (
       <>
         <CustomAlertDialog
+          isLoading={isDestroying}
           isOpen={isOpen}
           onOpen={onOpen}
           onClose={onClose}
@@ -34,7 +46,7 @@ function DashboardProductsTable() {
           desc="Delete Product"
           cancelTxt="cancel"
           okTxt="Delete"
-          onOkHandler={() => destroyProduct(3)}
+          onOkHandler={() => destroyProduct(idProduct)}
         />
         <TableContainer>
           <Table variant="striped" colorScheme="teal">
@@ -68,11 +80,18 @@ function DashboardProductsTable() {
                       to={`/products/${product?.id}`}
                       colorScheme="teal"
                       variant="solid"
-                      onClick={() => {}}
                     >
                       V
                     </Button>
-                    <Button colorScheme="red" variant="solid" onClick={onOpen}>
+                    <Button
+                      colorScheme="red"
+                      variant="solid"
+                      onClick={() => {
+                        setIdProduct(product?.id);
+
+                        onOpen();
+                      }}
+                    >
                       D
                     </Button>
                     <Button
@@ -90,6 +109,5 @@ function DashboardProductsTable() {
         </TableContainer>
       </>
     );
-
 }
 export default DashboardProductsTable;

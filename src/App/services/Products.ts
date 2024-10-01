@@ -1,3 +1,4 @@
+import cookieService from "@/services/cookieService";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const ProductsApiSlice = createApi({
@@ -23,6 +24,9 @@ export const ProductsApiSlice = createApi({
         return {
           url: `/api/products/${id}`,
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${cookieService.get("jwt")}`,
+          },
         };
       },
     }),
