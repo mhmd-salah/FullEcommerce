@@ -18,6 +18,16 @@ export const ProductsApiSlice = createApi({
           method: "GET",
         };
       },
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.data.map(({ id }: { id: number }) => ({
+                type: "Products" as const,
+                id,
+              })),
+              "Products",
+            ]
+          : ["Post"],
     }),
     deleteDashboardProduct: builder.mutation({
       query(id) {
@@ -29,6 +39,7 @@ export const ProductsApiSlice = createApi({
           },
         };
       },
+      invalidatesTags: (result, error, arg) => [{ type: "Products", id: arg.id }],
     }),
   }),
 });

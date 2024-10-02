@@ -3,6 +3,7 @@ import {
   useGetDashboardProductsQuery,
 } from "@/App/services/Products";
 import CustomAlertDialog from "@/shared/AlertDialog";
+import Modal from "@/shared/Modal";
 import {
   Button,
   Table,
@@ -23,10 +24,15 @@ function DashboardProductsTable() {
   const [destroyProduct, { isLoading: isDestroying, isSuccess }] =
     useDeleteDashboardProductMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isModalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure();
   const [idProduct, setIdProduct] = useState<null | number>(0);
   useEffect(() => {
     if (isSuccess) {
-      setIdProduct(null)
+      setIdProduct(null);
       onClose();
     }
   }, [isSuccess]);
@@ -37,6 +43,15 @@ function DashboardProductsTable() {
   else
     return (
       <>
+        <Modal
+          title="Update Product"
+          okText="Update"
+          cancelText="Cancel"
+          onClose={onModalClose}
+          isOpen={isModalOpen}
+        >
+          hello
+        </Modal>
         <CustomAlertDialog
           isLoading={isDestroying}
           isOpen={isOpen}
@@ -97,7 +112,7 @@ function DashboardProductsTable() {
                     <Button
                       colorScheme="blue"
                       variant="solid"
-                      onClick={() => {}}
+                      onClick={() => onModalOpen()}
                     >
                       E
                     </Button>
