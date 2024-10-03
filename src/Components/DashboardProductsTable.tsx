@@ -6,6 +6,14 @@ import CustomAlertDialog from "@/shared/AlertDialog";
 import Modal from "@/shared/Modal";
 import {
   Button,
+  FormControl,
+  FormLabel,
+  Input,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Table,
   TableCaption,
   TableContainer,
@@ -16,7 +24,7 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function DashboardProductsTable() {
@@ -30,6 +38,21 @@ function DashboardProductsTable() {
     onClose: onModalClose,
   } = useDisclosure();
   const [idProduct, setIdProduct] = useState<null | number>(0);
+  const [productToEdit, setProductToEdit] = useState<null | Record<
+    string,
+    string
+  >>(null);
+
+  // Handler
+  const onChangeHandler =
+    (field: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = e?.target.value;
+      setProductToEdit({
+        ...productToEdit,
+        [field]: parseInt(inputValue) == -1 ? inputValue : +inputValue,
+      });
+      console.log(productToEdit);
+    };
   useEffect(() => {
     if (isSuccess) {
       setIdProduct(null);
@@ -50,7 +73,49 @@ function DashboardProductsTable() {
           onClose={onModalClose}
           isOpen={isModalOpen}
         >
-          hello
+          <FormControl>
+            <FormLabel>Update Product Name</FormLabel>
+            <Input
+              placeholder="Product Title"
+              // name="title"
+              value={productToEdit?.title}
+              onChange={onChangeHandler("title")}
+            />
+          </FormControl>
+          <FormControl my={3}>
+            <FormLabel>Update Price</FormLabel>
+            <NumberInput
+              defaultValue={productToEdit?.price}
+              precision={2}
+              step={0.2}
+            >
+              <NumberInputField
+                // name="price"
+                onChange={onChangeHandler("price")}
+              />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </FormControl>
+          <FormControl my={3}>
+            <FormLabel>Count in Stock</FormLabel>
+            <NumberInput defaultValue={0} precision={2} step={0.2}>
+              <NumberInputField
+                // name="stock"
+                defaultValue={productToEdit?.stock}
+                onChange={onChangeHandler("stock")}
+              />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </FormControl>
+          <FormControl>
+            <input type="file" />
+          </FormControl>
         </Modal>
         <CustomAlertDialog
           isLoading={isDestroying}
@@ -112,7 +177,10 @@ function DashboardProductsTable() {
                     <Button
                       colorScheme="blue"
                       variant="solid"
-                      onClick={() => onModalOpen()}
+                      onClick={() => {
+                        setProductToEdit(product.attributes);
+                        onModalOpen();
+                      }}
                     >
                       E
                     </Button>

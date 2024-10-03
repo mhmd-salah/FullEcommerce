@@ -10,20 +10,23 @@ import {
 import { Modal as ChakraModal } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-
-interface IProps{
-  title:string;
-  okText:string;
-  cancelText:string;
-  children:ReactNode;
-  isOpen:boolean;
-  onClose:()=>any;
+interface IProps {
+  title: string;
+  okText: string;
+  cancelText: string;
+  children: ReactNode;
+  isOpen: boolean;
+  onClose: () => any;
 }
 
-
-
-
-function Modal({ title,okText,cancelText,children,isOpen, onClose, }: IProps) {
+function Modal({
+  title,
+  okText,
+  cancelText,
+  children,
+  isOpen,
+  onClose,
+}: IProps) {
   return (
     <ChakraModal
       isCentered
@@ -31,15 +34,13 @@ function Modal({ title,okText,cancelText,children,isOpen, onClose, }: IProps) {
       isOpen={isOpen}
       motionPreset="slideInBottom"
     >
-      <ModalOverlay />
+      <ModalOverlay backdropFilter={"blur(3px)"} bg={"blackAlpha.600"}/>
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          {children}
-        </ModalBody>
+        <ModalBody>{children}</ModalBody>
         <ModalFooter>
-          <Button  mr={3} onClick={onClose}>
+          <Button mr={3} onClick={onClose}>
             {cancelText}
           </Button>
           <Button colorScheme="blue">{okText}</Button>

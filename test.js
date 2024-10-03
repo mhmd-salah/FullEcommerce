@@ -1,29 +1,12 @@
-
-
-function test(){
-  console.log("test")
-}
-test.age=()=>{
-  console.log("mohamed salah")
-}
-
-test.User = {
-  name:"MOHAMED",
-  age:21,
-  liveIn:"Egypt"
-}
-
-function one(o){
-  return function(t){
-    return o + t
+let log = (prim) => (name) => {
+  if (prim == "admin") console.log("you are admin", name);
+  else {
+    console.log("you are user ", name);
   }
-}
+};
 
-let addNumToThree = one(3)
-console.log(addNumToThree(10));
+let logAdmin = log("admin");
+let logUser = log("user")
 
-
-test()
-test.age();
-console.log(test.User)
-
+logAdmin("ahmed");
+logUser("mohamed salah");
