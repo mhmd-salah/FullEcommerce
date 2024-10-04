@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { Modal as ChakraModal } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import {  ReactNode } from "react";
 
 interface IProps {
   title: string;
@@ -17,6 +17,7 @@ interface IProps {
   children: ReactNode;
   isOpen: boolean;
   onClose: () => any;
+  onOkClick:any;
 }
 
 function Modal({
@@ -26,6 +27,7 @@ function Modal({
   children,
   isOpen,
   onClose,
+  onOkClick
 }: IProps) {
   return (
     <ChakraModal
@@ -43,7 +45,7 @@ function Modal({
           <Button mr={3} onClick={onClose}>
             {cancelText}
           </Button>
-          <Button colorScheme="blue">{okText}</Button>
+          <Button colorScheme="blue" onClick={onOkClick}>{okText}</Button>
         </ModalFooter>
       </ModalContent>
     </ChakraModal>

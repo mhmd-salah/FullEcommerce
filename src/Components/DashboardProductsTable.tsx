@@ -5,6 +5,7 @@ import {
 import CustomAlertDialog from "@/shared/AlertDialog";
 import Modal from "@/shared/Modal";
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
@@ -24,7 +25,7 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function DashboardProductsTable() {
@@ -42,17 +43,26 @@ function DashboardProductsTable() {
     string,
     string
   >>(null);
+  const [thumbnail, setThumbnail]= useState<null | any>(null);
 
-  // Handler
-  const onChangeHandler =
+  // |-Handlers-|
+  const ChangeHandler =
     (field: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = e?.target.value;
       setProductToEdit({
         ...productToEdit,
-        [field]: parseInt(inputValue) == -1 ? inputValue : +inputValue,
+        [field]: inputValue,
       });
       console.log(productToEdit);
     };
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(productToEdit);
+  };
+  const ChangeThumbnailHandler=(e:ChangeEvent)=>{
+    setThumbnail(e.target?.files[0]);
+
+  }
   useEffect(() => {
     if (isSuccess) {
       setIdProduct(null);
@@ -72,50 +82,60 @@ function DashboardProductsTable() {
           cancelText="Cancel"
           onClose={onModalClose}
           isOpen={isModalOpen}
+          onOkClick={submitHandler}
         >
-          <FormControl>
-            <FormLabel>Update Product Name</FormLabel>
-            <Input
-              placeholder="Product Title"
-              // name="title"
-              value={productToEdit?.title}
-              onChange={onChangeHandler("title")}
-            />
-          </FormControl>
-          <FormControl my={3}>
-            <FormLabel>Update Price</FormLabel>
-            <NumberInput
-              defaultValue={productToEdit?.price}
-              precision={2}
-              step={0.2}
-            >
-              <NumberInputField
-                // name="price"
-                onChange={onChangeHandler("price")}
+          <Box as="form" onSubmit={submitHandler}>
+            <FormControl>
+              <FormLabel>Update Product Name</FormLabel>
+              <Input
+                placeholder="Product Title"
+                // name="title"
+                value={productToEdit?.title}
+                onChange={ChangeHandler("title")}
               />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-          </FormControl>
-          <FormControl my={3}>
-            <FormLabel>Count in Stock</FormLabel>
-            <NumberInput defaultValue={0} precision={2} step={0.2}>
-              <NumberInputField
-                // name="stock"
-                defaultValue={productToEdit?.stock}
-                onChange={onChangeHandler("stock")}
+            </FormControl>
+            <FormControl my={3}>
+              <FormLabel>Update Price</FormLabel>
+              <NumberInput
+                defaultValue={productToEdit?.price}
+                precision={2}
+                step={0.2}
+              >
+                <NumberInputField
+                  // name="price"
+                  onChange={ChangeHandler("price")}
+                />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+            <FormControl my={3}>
+              <FormLabel>Count in Stock</FormLabel>
+              <NumberInput defaultValue={0} precision={2} step={0.2}>
+                <NumberInputField
+                  // name="stock"
+                  defaultValue={productToEdit?.stock}
+                  onChange={ChangeHandler("stock")}
+                />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Thumbnail</FormLabel>
+              <Input
+                id="thumbnail"
+                type="file"
+                p={2}
+                accept="image/png, image/gif, image/jpeg"
+                onChange={ChangeThumbnailHandler}
               />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-          </FormControl>
-          <FormControl>
-            <input type="file" />
-          </FormControl>
+            </FormControl>
+          </Box>
         </Modal>
         <CustomAlertDialog
           isLoading={isDestroying}

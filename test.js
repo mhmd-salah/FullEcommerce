@@ -1,12 +1,20 @@
-let log = (prim) => (name) => {
-  if (prim == "admin") console.log("you are admin", name);
-  else {
-    console.log("you are user ", name);
-  }
+const sym = Symbol("desc");
+
+const obj = {
+  [sym]: "value",
 };
 
-let logAdmin = log("admin");
-let logUser = log("user")
 
-logAdmin("ahmed");
-logUser("mohamed salah");
+console.log(obj[sym]);
+
+
+let id = "id";
+
+const objTwo = {
+  id:"value",
+}
+
+
+const idUniq = Symbol("id");
+
+console.log(idUniq)
