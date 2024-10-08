@@ -18,6 +18,7 @@ interface IProps {
   isOpen: boolean;
   onClose: () => any;
   onOkClick:any;
+  isLoading?:boolean;
 }
 
 function Modal({
@@ -27,7 +28,8 @@ function Modal({
   children,
   isOpen,
   onClose,
-  onOkClick
+  onOkClick,
+  isLoading
 }: IProps) {
   return (
     <ChakraModal
@@ -45,7 +47,7 @@ function Modal({
           <Button mr={3} onClick={onClose}>
             {cancelText}
           </Button>
-          <Button colorScheme="blue" onClick={onOkClick}>{okText}</Button>
+          <Button colorScheme="blue" onClick={onOkClick} isLoading={isLoading}>{okText}</Button>
         </ModalFooter>
       </ModalContent>
     </ChakraModal>

@@ -1,6 +1,7 @@
 import {
   useDeleteDashboardProductMutation,
   useGetDashboardProductsQuery,
+  useUpdateDashboardProductMutation,
 } from "@/App/services/Products";
 import CustomAlertDialog from "@/shared/AlertDialog";
 import Modal from "@/shared/Modal";
@@ -32,6 +33,10 @@ function DashboardProductsTable() {
   const { data, isLoading } = useGetDashboardProductsQuery({ page: 1 });
   const [destroyProduct, { isLoading: isDestroying, isSuccess }] =
     useDeleteDashboardProductMutation();
+  const [
+    updateProduct,
+    { isLoading: isUpdating, isSuccess: isUpdatingSuccess },
+  ] = useUpdateDashboardProductMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: isModalOpen,
@@ -43,7 +48,7 @@ function DashboardProductsTable() {
     string,
     string
   >>(null);
-  const [thumbnail, setThumbnail]= useState<null | any>(null);
+  const [thumbnail, setThumbnail] = useState<null | any>(null);
 
   // |-Handlers-|
   const ChangeHandler =
@@ -57,18 +62,33 @@ function DashboardProductsTable() {
     };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(productToEdit);
+    const formData = new FormData();
+    formData.append(
+      "data",
+      JSON.stringify({
+        title: productToEdit?.title,
+        price: productToEdit?.price,
+        stock: productToEdit?.stock,
+      })
+    );
+    formData.append("files.thumbnail", thumbnail);
+    updateProduct({ id: idProduct, body: formData });
   };
-  const ChangeThumbnailHandler=(e:ChangeEvent)=>{
-    setThumbnail(e.target?.files[0]);
-
-  }
+  const ChangeThumbnailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setThumbnail(e.target?.files[0]);
+    }
+  };
   useEffect(() => {
     if (isSuccess) {
       setIdProduct(null);
       onClose();
     }
-  }, [isSuccess]);
+    if (isUpdatingSuccess) {
+      setIdProduct(null);
+      onModalClose();
+    }
+  }, [isUpdatingSuccess]);
   if (isLoading)
     return (
       <div className="text-2xl text-gray-700 font-light">Table Loading...</div>
@@ -83,6 +103,7 @@ function DashboardProductsTable() {
           onClose={onModalClose}
           isOpen={isModalOpen}
           onOkClick={submitHandler}
+          isLoading={isUpdating}
         >
           <Box as="form" onSubmit={submitHandler}>
             <FormControl>
@@ -198,6 +219,7 @@ function DashboardProductsTable() {
                       colorScheme="blue"
                       variant="solid"
                       onClick={() => {
+                        setIdProduct(product?.id);
                         setProductToEdit(product.attributes);
                         onModalOpen();
                       }}

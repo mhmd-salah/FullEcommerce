@@ -1,20 +1,16 @@
-const sym = Symbol("desc");
-
-const obj = {
-  [sym]: "value",
-};
-
-
-console.log(obj[sym]);
-
-
-let id = "id";
-
-const objTwo = {
-  id:"value",
+class MainComponent{
+    setName(name){
+      this.name = name;
+    }
+    getName(){
+        return this.name;
+    }
+    setAge(age){
+      this.age = age;
+    }
+    getAge(){
+      return this.age;
+    }
 }
 
-
-const idUniq = Symbol("id");
-
-console.log(idUniq)
+export default new MainComponent();
